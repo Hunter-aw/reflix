@@ -1,0 +1,41 @@
+.catalogHeader {
+    display: flex;
+    justify-content: space-between;
+    /* height: 2em; */
+    font-size: 1.5em;
+    padding: 10px
+}
+
+.search {
+    background-color: rgb(68, 68, 68);
+    color: whitesmoke;
+    border-color: whitesmoke;
+    /* border: none; */
+    border-top: 0px;
+    border-right: 0px;
+    width: 50%;
+    font-size: 1.3em;
+    padding-left: 20px
+}
+
+.movies {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    /* padding-top: 50px */
+}
+.movie {
+    padding: 20px;
+}
+.movieImg {
+    height: 400px;
+    width: 320px
+}
+.catalogIntro {
+    text-align: left;
+    padding-left: 20px;
+    font-weight: 100;
+    font-size: 1.3em;
+    width: 50%;
+
+}

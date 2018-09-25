@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css?family=Rubik');
+body{
+  font-family: 'Rubik', sans-serif;
+  background-color: rgb(68, 68, 68);
+  color: whitesmoke;
+}
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+.navBar {
+  background-color: #222;
+  /* text-align: left; */
+  height: 75px;
+  color: whitesmoke !important;
+  font-size: 2em;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between
+  
+}
+.navBar a {
+  text-decoration: none;
+  color: whitesmoke;
+  padding-top: 5px;
+  font-weight: 100
+}
+.landing {
+  padding: 60px;
+  color: whitesmoke;
+}
+.userBox {
+  padding-top: 40px;
+  height: 320px;
+  display: flex;
+  justify-content: space-around
+}
+.user{
+  font-size:  1.8em;
+  width: 320px;
+  text-align: center;
+  /* padding: 20px */
+}
+.user img {
+  padding-bottom: 20px;
+}
+.landingIntro {
+  font-size: 3.5em;
+  font-weight: 100
+}
+
+
