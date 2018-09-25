@@ -26,10 +26,26 @@
 }
 .movie {
     padding: 20px;
+    position: relative;
+}
+.rentButton {
+    position: absolute;
+    z-index: 1000;
+    font-size: 2.0em;
+    background-color: rgba(39, 39, 39, 0.689);
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    right: 30px;
+    top: 30px;
+    font-weight: 200
+
 }
 .movieImg {
     height: 400px;
-    width: 320px
+    width: 320px;
+    border-radius: 4%;
+    box-shadow: 10px 5px rgba(39, 39, 39, 0.644)
 }
 .catalogIntro {
     text-align: left;
@@ -38,4 +54,20 @@
     font-size: 1.3em;
     width: 50%;
 
+}
+.movieDetails{
+    padding: 50px
+}
+.movieDetails img{
+    height: 500px;
+    width: 440px;
+}
+.description {
+    text-align: left;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 20px
+}
+.rentButton{
+    cursor: pointer;
 }
