@@ -60,6 +60,14 @@ class App extends Component {
       } 
     this.setState({catalog: updatedCatalog})
   }
+  resetSearch = () => {
+    let catalog = [...this.state.catalog]
+    for (let movie of catalog) {
+      movie.isSearched = true
+    }
+    this.setState({catalog: catalog})
+  }
+
   render() {
     return (
       <Router>
@@ -71,8 +79,9 @@ class App extends Component {
             <h3 className= "logo"><Link to="/">REFLIX</Link></h3> 
             </nav>
             <Route path="/" exact render={() => <Landing/>}/>
-            <Route path="/catalog" exact onEnter ={() => {this.movieSearch}}render={() => 
-              <Catalog state={this.state} rentMovie = {this.rentMovie} movieSearch = {this.movieSearch}/>}/>
+            <Route path="/catalog" exact render={() => 
+                <Catalog state={this.state} rentMovie = {this.rentMovie} 
+                movieSearch = {this.movieSearch} resetSearch = {this.resetSearch} />}/>
             <Route path="/movies/:id" exact render={({ match }) => 
               <MovieDetails match={match} catalog={this.state.catalog}/>}/>
           </div>

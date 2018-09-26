@@ -5,6 +5,10 @@ import Movie from './Movie.js'
 
 class Catalog extends Component {
 
+    componentDidMount() {
+        this.props.resetSearch()
+    }
+    
     render() {
         return(
             <div>
