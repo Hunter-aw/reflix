@@ -20,9 +20,14 @@
 
 .movies {
     display: flex;
-    justify-content: space-between;
+    justify-content: left;
     flex-wrap: wrap;
     /* padding-top: 50px */
+}
+.rentedMovies {
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap
 }
 .movie {
     padding: 20px;
@@ -70,4 +75,7 @@
 }
 .rentButton{
     cursor: pointer;
+}
+.search-false{
+    display: none
 }

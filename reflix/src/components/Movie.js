@@ -4,8 +4,10 @@ import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom
 class Movie extends Component {
     render() {
         let path = `/movies/${this.props.id}`
+        let searchClass = `search-${this.props.searched}`
+        let className = `movie ${searchClass}`
         return(
-            <span className="movie">
+            <span className={className}>
             <Link to={path} id={this.props.id}>
                 <img className ="movieImg" src = {this.props.img}></img>
             </Link>
