@@ -5,6 +5,11 @@ import Loader from './components/Loader';
 import Landing from './components/Landing';
 import Catalog from './components/Catalog';
 import MovieDetails from './components/MovieDetails'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlusCircle, faMinusCircle } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faPlusCircle, faMinusCircle)
 
 
 
@@ -23,9 +28,8 @@ class App extends Component {
       rentCount: 0
     }
   }
-  rentMovie = (event) => {
+  rentMovie = (movieId) => {
     let updatedCatalog = [...this.state.catalog];
-    let movieId = event.target.id;
     let newCount = this.state.rentCount;
     let newBudget = this.state.budget
     if (!updatedCatalog[movieId].isRented && newBudget < 2) {
@@ -49,6 +53,7 @@ class App extends Component {
     let term = event.target.value
     let caseTerm = term.toLowerCase()
     let updatedCatalog = [...this.state.catalog]
+    console.log(event.target)
       let searchedCatalog = updatedCatalog.filter(m => m.title.toLowerCase().includes(caseTerm));
       for (let movie of updatedCatalog) {
         if (!searchedCatalog.includes(movie)) {
