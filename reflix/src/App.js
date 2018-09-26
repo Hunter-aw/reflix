@@ -71,7 +71,7 @@ class App extends Component {
             <h3 className= "logo"><Link to="/">REFLIX</Link></h3> 
             </nav>
             <Route path="/" exact render={() => <Landing/>}/>
-            <Route path="/catalog" exact render={() => 
+            <Route path="/catalog" exact onEnter ={() => {this.movieSearch}}render={() => 
               <Catalog state={this.state} rentMovie = {this.rentMovie} movieSearch = {this.movieSearch}/>}/>
             <Route path="/movies/:id" exact render={({ match }) => 
               <MovieDetails match={match} catalog={this.state.catalog}/>}/>
