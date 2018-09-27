@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Loader from './components/Loader';
 import Landing from './components/Landing';
 import Catalog from './components/Catalog';
@@ -25,10 +25,23 @@ class App extends Component {
           { id: 3, isRented: false, isSearched: true, title: "The Sword in the Stone", year: 1963, img: "https://www.disneyinfo.nl/images/laserdiscs/229-1-AS-front.jpg", descrShort: "Arthur is a young boy who just wants to be a knight's squire. Alas, he is dubbed 'Wart' early on, and it was all downhill from there for a while. On a hunting trip he falls in on Merlin, literally. Merlin is a possibly-mentally-unstable-and-ethically-dubious Wizard that turns Arthur into a literate, at-one-point harassed squirrel. Watch to find out what the heck that means." },
           { id: 4, isRented: false, isSearched: true, title: "Beauty and the Beast", year: 2016, img: "https://images-na.ssl-images-amazon.com/images/I/51ArFYSFGJL.jpg", descrShort: "Basically the same as the original, except now Hermi-- Emma Wattson plays Belle, fittingly so some would say, given how actively progressive she is regarding women's rights. Rumor has it that in the bonus scenes she whips out a wand and turns Gaston into a toad, but in order to watch those scenes you need to recite a certain incantation." }
         ],
-      rentCount: 0
+      rentCount: 0,
+      users: [
+        {name: "Hunter", budget: 10.0, image: "https://mir-s3-cdn-cf.behance.net/project_modules/disp/bf6e4a33850498.56ba69ac3064f.png"},
+        {name: "Dubi", budget: 10.0, image: "https://pro2-bar-s3-cdn-cf1.myportfolio.com/dddb0c1b4ab622854dd81280840458d3/92995677ac0aab719760c33c_rw_600.png?h=c453d5442731bca5c02fcc8a4542af57"},
+        {name: "Jona", budget: 10.0, image: "https://mir-s3-cdn-cf.behance.net/project_modules/disp/64623a33850498.56ba69ac2a6f7.png"},
+        {name: "Bar", budget: 10.0, image: "https://pro2-bar-s3-cdn-cf.myportfolio.com/dddb0c1b4ab622854dd81280840458d3/8e65207aca8751179e10e03c_rw_600.png?h=506076a9f26fdf62293000f07c8c3c78"}
+      ]
     }
   }
-  rentMovie = (movieId) => {
+  componentDidMount() {
+    for (let user of this.state.users) {
+      if (!localStorage[user.name]) {
+        localStorage.setItem(user.name, JSON.stringify(this.state))
+      }
+    }
+  }
+  rentMovie = (movieId, userName) => {
     let updatedCatalog = [...this.state.catalog];
     let newCount = this.state.rentCount;
     let newBudget = this.state.budget
@@ -46,14 +59,16 @@ class App extends Component {
         newCount --;
         newBudget += 3;
       }
-      this.setState({budget: newBudget, catalog: updatedCatalog, rentCount: newCount})
+      this.setState({budget: newBudget, 
+                    catalog: updatedCatalog, 
+                    rentCount: newCount},
+         () => {localStorage.setItem(userName, JSON.stringify(this.state))})
   }
 
   movieSearch = (event) => {
     let term = event.target.value
     let caseTerm = term.toLowerCase()
     let updatedCatalog = [...this.state.catalog]
-    console.log(event.target)
       let searchedCatalog = updatedCatalog.filter(m => m.title.toLowerCase().includes(caseTerm));
       for (let movie of updatedCatalog) {
         if (!searchedCatalog.includes(movie)) {
@@ -65,6 +80,15 @@ class App extends Component {
       } 
     this.setState({catalog: updatedCatalog})
   }
+
+  loadUserfromStorage = (user) => {
+      let userInfo = JSON.parse(localStorage.getItem(user))
+      // debugger;
+        this.setState({budget:userInfo.budget, 
+          catalog: userInfo.catalog, 
+          rentCount: userInfo.rentCount}, () => {console.log(this.state.catalog)})    
+  }
+
   resetSearch = () => {
     let catalog = [...this.state.catalog]
     for (let movie of catalog) {
@@ -83,10 +107,11 @@ class App extends Component {
             <h5><Link to="/">Home</Link>{'  '}<Link to="/catalog">Catalog</Link></h5>
             <h3 className= "logo"><Link to="/">REFLIX</Link></h3> 
             </nav>
-            <Route path="/" exact render={() => <Landing/>}/>
-            <Route path="/catalog" exact render={() => 
-                <Catalog state={this.state} rentMovie = {this.rentMovie} 
-                movieSearch = {this.movieSearch} resetSearch = {this.resetSearch} />}/>
+            <Route path="/" exact render={() => <Landing users={this.state.users}/>}/>
+            <Route path="/catalog/:user" exact render={({ match }) => 
+                <Catalog state={this.state} match={match} rentMovie = {this.rentMovie} 
+                         movieSearch = {this.movieSearch} resetSearch = {this.resetSearch} 
+                         loadUser = {this.loadUserfromStorage}/>}/>
             <Route path="/movies/:id" exact render={({ match }) => 
               <MovieDetails match={match} catalog={this.state.catalog}/>}/>
           </div>

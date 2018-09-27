@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Link} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class Movie extends Component {
-    passId = () => {
-        this.props.rentMovie(this.props.id)
+    rentMovie = () => {
+        this.props.rentMovie(this.props.id, this.props.userName)
     }
     render() {
         let path = `/movies/${this.props.id}`
@@ -15,7 +15,7 @@ class Movie extends Component {
             <Link to={path} id={this.props.id}>
                 <img className ="movieImg" src = {this.props.img}></img>
             </Link>
-            <FontAwesomeIcon className="rentButton" onClick={this.passId} 
+            <FontAwesomeIcon className="rentButton" onClick={this.rentMovie} 
             icon ={!this.props.rented ? "plus-circle" : "minus-circle"}/>
             </span>
         )

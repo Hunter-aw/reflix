@@ -1,9 +1,8 @@
 .catalogHeader {
     display: flex;
     justify-content: space-between;
-    /* height: 2em; */
     font-size: 1.5em;
-    padding: 10px
+    padding: 10px;
 }
 
 .search {
@@ -16,6 +15,11 @@
     width: 50%;
     font-size: 1.3em;
     padding-left: 20px
+}
+.thumbnail {
+    height: 60px;
+    width: 60px;
+    /* padding-left: 30% */
 }
 
 .movies {
